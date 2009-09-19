@@ -67,7 +67,13 @@ static const CGFloat kSectionHeaderHeight = 35;
   if ([object isKindOfClass:[TTTableLinkedItem class]]) {
     TTTableLinkedItem* item = object;
     if (item.URL && [_controller shouldOpenURL:item.URL]) {
-      TTOpenURL(item.URL);
+        if (item.selfObj) {
+            NSDictionary* query = [NSDictionary dictionaryWithObject:item.selfObj forKey:@"selfObj"];
+            [[TTNavigator navigator] openURL:item.URL query:query animated:YES];
+        }
+        else {
+            TTOpenURL(item.URL);
+        }
     }
 
     if ([object isKindOfClass:[TTTableButton class]]) {

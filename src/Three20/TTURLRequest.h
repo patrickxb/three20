@@ -22,7 +22,10 @@
   BOOL _isLoading;
   BOOL _shouldHandleCookies;
   BOOL _respondedFromCache;
+  NSInteger _bodySize;
 }
+
+@property(nonatomic,readonly) NSInteger bodySize;
 
 /**
  * An object that receives messages about the progress of the request.

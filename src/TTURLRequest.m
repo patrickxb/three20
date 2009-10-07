@@ -17,7 +17,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
   timestamp = _timestamp, userInfo = _userInfo, isLoading = _isLoading,
   shouldHandleCookies = _shouldHandleCookies, totalBytesLoaded = _totalBytesLoaded,
   totalBytesExpected = _totalBytesExpected, respondedFromCache = _respondedFromCache,
-  headers = _headers;
+  headers = _headers, bodySize = _bodySize;
 
 + (TTURLRequest*)request {
   return [[[TTURLRequest alloc] init] autorelease];
@@ -58,6 +58,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
     _totalBytesLoaded = 0;
     _totalBytesExpected = 0;
     _respondedFromCache = NO;
+    _bodySize = 0;
   }
   return self;
 }
@@ -183,6 +184,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
   }
 
   //TTLOG(@"Sending %s", [body bytes]);
+  _bodySize = [body length];
   return body;
 }
 
@@ -241,7 +243,8 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 
 - (BOOL)send {
   if (_parameters) {
-    TTLOG(@"SEND %@ %@", self.URL, self.parameters);
+      // XXX TTLOG
+    NSLog(@"SEND %@ %@", self.URL, self.parameters);
   }
   return [[TTURLRequestQueue mainQueue] sendRequest:self];
 }

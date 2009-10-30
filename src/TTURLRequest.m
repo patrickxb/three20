@@ -27,6 +27,12 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
   return [[[TTURLRequest alloc] initWithURL:URL delegate:delegate] autorelease];
 }
 
+- (BOOL)isPostOrPut
+{
+        NSString* method = [_httpMethod uppercaseString];
+        return ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"]);
+}
+
 - (id)initWithURL:(NSString*)URL delegate:(id<TTURLRequestDelegate>)delegate {
   if (self = [self init]) {
     _URL = [URL retain];
@@ -98,7 +104,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 }
 
 - (NSString*)generateCacheKey {
-  if ([_httpMethod isEqualToString:@"POST"]) {
+  if ([self isPostOrPut]) {
     NSMutableString* joined = [[[NSMutableString alloc] initWithString:self.URL] autorelease]; 
     NSEnumerator* e = [_parameters keyEnumerator];
     for (id key; key = [e nextObject]; ) {
@@ -200,7 +206,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 - (NSData*)httpBody {
   if (_httpBody) {
     return _httpBody;
-  } else if ([[_httpMethod uppercaseString] isEqualToString:@"POST"]) {
+  } else if ([self isPostOrPut]) {
     return [self generatePostBody];
   } else {
     return nil;
@@ -210,7 +216,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 - (NSString*)contentType {
   if (_contentType) {
     return _contentType;
-  } else if ([_httpMethod isEqualToString:@"POST"]) {
+  } else if ([self isPostOrPut]) {
     return [NSString stringWithFormat:@"multipart/form-data; boundary=%@", kStringBoundary];
   } else {
     return nil;

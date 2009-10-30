@@ -198,8 +198,8 @@ static TTURLRequestQueue* gMainQueue = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {  
-//  TTLOG(@"  FAILED LOADING %@ FOR %@", _URL, error);
-    NSLog(@"  FAILED LOADING %@ FOR %@", _URL, error);
+    TTLOG(@"  FAILED LOADING %@ FOR %@", _URL, error);
+    //NSLog(@"  FAILED LOADING %@ FOR %@", _URL, error);
 
   TTNetworkRequestStopped();
   

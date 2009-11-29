@@ -27,12 +27,14 @@
     textView.text = @"UITextView";
     textView.font = TTSTYLEVAR(font);
     
+          /*
     TTTextEditor* editor = [[[TTTextEditor alloc] init] autorelease];
     editor.textView.font = TTSTYLEVAR(font);
     editor.backgroundColor = TTSTYLEVAR(backgroundColor);
     editor.autoresizesToText = NO;
     editor.minNumberOfLines = 3;
     editor.placeholder = @"TTTextEditor";
+           */
     
     UISwitch* switchy = [[[UISwitch alloc] init] autorelease];
     TTTableControlItem* switchItem = [TTTableControlItem itemWithCaption:@"UISwitch" control:switchy];
@@ -42,7 +44,7 @@
     
     self.dataSource = [TTListDataSource dataSourceWithObjects:
       textField,
-      editor,
+//      editor,
       textView,
       textFieldItem,
       switchItem,

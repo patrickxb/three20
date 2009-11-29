@@ -205,7 +205,8 @@
 }
 
 - (void)parseText:(NSString*)string {
-  if (_parseLineBreaks) {
+
+        if (_parseLineBreaks) {
     NSCharacterSet* newLines = [NSCharacterSet newlineCharacterSet];
     NSInteger index = 0;
     NSInteger length = string.length;

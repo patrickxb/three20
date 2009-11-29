@@ -182,7 +182,7 @@ static TTURLRequestQueue* gMainQueue = nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   TTNetworkRequestStopped();
 
-  if (_response.statusCode == 200) {
+  if (_response.statusCode == 200 || _response.statusCode == 201) {
     [_queue performSelector:@selector(loader:didLoadResponse:data:) withObject:self
       withObject:_response withObject:_responseData];
   } else {
@@ -198,7 +198,8 @@ static TTURLRequestQueue* gMainQueue = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {  
-  TTLOG(@"  FAILED LOADING %@ FOR %@", _URL, error);
+    TTLOG(@"  FAILED LOADING %@ FOR %@", _URL, error);
+    //NSLog(@"  FAILED LOADING %@ FOR %@", _URL, error);
 
   TTNetworkRequestStopped();
   
@@ -500,7 +501,7 @@ static TTURLRequestQueue* gMainQueue = nil;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)setSuspended:(BOOL)isSuspended {
-  // TTLOG(@"SUSPEND LOADING %d", isSuspended);
+  TTLOG(@"SUSPEND LOADING %d", isSuspended);
   _suspended = isSuspended;
   
   if (!_suspended) {

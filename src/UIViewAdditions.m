@@ -33,6 +33,7 @@
 
 @end
 
+#ifdef DEBUG
 @interface UITouch (TTCategory)
 
 - (id)initInView:(UIView *)view location:(CGPoint)location;
@@ -90,6 +91,7 @@
 }
 
 @end
+#endif
 
 @implementation UIView (TTCategory)
 

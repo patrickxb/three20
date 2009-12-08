@@ -1,4 +1,24 @@
+/**
+ * Copyright 2009 Facebook
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #import "Three20/TTGlobal.h"
+
+
+// Remove GSEvent and UITouchAdditions from Release builds
+#ifdef DEBUG
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // This code for synthesizing touch events is derived from:
@@ -67,6 +87,7 @@
 
 @end
 
+
 @implementation UIEvent (TTCategory)
 
 - (id)initWithTouch:(UITouch *)touch {
@@ -92,6 +113,9 @@
 
 @end
 #endif
+
+#endif
+
 
 @implementation UIView (TTCategory)
 
@@ -303,7 +327,7 @@
 
 - (CGRect)frameWithKeyboardSubtracted:(CGFloat)plusHeight {
   CGRect frame = self.frame;
-  if ([self.window performSelector:@selector(firstResponder)]) {
+  if (TTIsKeyboardVisible()) {
     CGRect screenFrame = TTScreenBounds();
     CGFloat keyboardTop = (screenFrame.size.height - (TTKeyboardHeight() + plusHeight));
     CGFloat screenBottom = self.screenY + frame.size.height;

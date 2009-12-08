@@ -1,13 +1,35 @@
+/**
+ * Copyright 2009 Facebook
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Three20/TTDebug.h"
+#import "Three20/TTDebugFlags.h"
 #import "Three20/NSObjectAdditions.h"
 #import "Three20/NSStringAdditions.h"
 #import "Three20/NSDateAdditions.h"
+#import "Three20/NSDataAdditions.h"
 #import "Three20/NSArrayAdditions.h"
+#import "Three20/NSMutableArrayAdditions.h"
+#import "Three20/NSMutableDictionaryAdditions.h"
 #import "Three20/UIColorAdditions.h"
 #import "Three20/UIFontAdditions.h"
 #import "Three20/UIImageAdditions.h"
 #import "Three20/UIViewControllerAdditions.h"
+#import "Three20/UIWindowAdditions.h"
 #import "Three20/UINavigationControllerAdditions.h"
 #import "Three20/UITabBarControllerAdditions.h"
 #import "Three20/UIViewAdditions.h"
@@ -18,30 +40,35 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Logging Helpers
 
+// Deprecated, please see Three20/TTDebug for more details.
 #ifdef DEBUG
 #define TTLOG NSLog
 #else
 #define TTLOG    
 #endif
 
+// Deprecated, please see Three20/TTDebug for more details.
 #define TTWARN TTLOG
 
+
+// Helper
+
 #define TTLOGRECT(rect) \
-  TTLOG(@"%s x=%f, y=%f, w=%f, h=%f", #rect, rect.origin.x, rect.origin.y, \
+  TTDINFO(@"%s x=%f, y=%f, w=%f, h=%f", #rect, rect.origin.x, rect.origin.y, \
     rect.size.width, rect.size.height)
 
 #define TTLOGPOINT(pt) \
-  TTLOG(@"%s x=%f, y=%f", #pt, pt.x, pt.y)
+  TTDINFO(@"%s x=%f, y=%f", #pt, pt.x, pt.y)
 
 #define TTLOGSIZE(size) \
-  TTLOG(@"%s w=%f, h=%f", #size, size.width, size.height)
+  TTDINFO(@"%s w=%f, h=%f", #size, size.width, size.height)
 
 #define TTLOGEDGES(edges) \
-  TTLOG(@"%s left=%f, right=%f, top=%f, bottom=%f", #edges, edges.left, edges.right, \
+  TTDINFO(@"%s left=%f, right=%f, top=%f, bottom=%f", #edges, edges.left, edges.right, \
     edges.top, edges.bottom)
 
 #define TTLOGHSV(_COLOR) \
-  TTLOG(@"%s h=%f, s=%f, v=%f", #_COLOR, _COLOR.hue, _COLOR.saturation, _COLOR.value)
+  TTDINFO(@"%s h=%f, s=%f, v=%f", #_COLOR, _COLOR.hue, _COLOR.saturation, _COLOR.value)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Errors
@@ -84,7 +111,7 @@
 #define TTSTYLEVAR(_VARNAME) [TTSTYLESHEET _VARNAME]
 
 #define TTLOGVIEWS(_VIEW) \
-  { for (UIView* view = _VIEW; view; view = view.superview) { TTLOG(@"%@", view); } }
+  { for (UIView* view = _VIEW; view; view = view.superview) { TTDINFO(@"%@", view); } }
 
 #define TTIMAGE(_URL) [[TTURLCache sharedCache] imageForURL:_URL]
 
@@ -112,6 +139,7 @@ typedef enum {
 
 #define TT_DEFAULT_CACHE_INVALIDATION_AGE (60*60*24) // 1 day
 #define TT_DEFAULT_CACHE_EXPIRATION_AGE (60*60*24*7) // 1 week
+#define TT_CACHE_EXPIRATION_AGE_NEVER (1.0 / 0.0)    // inf
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Time
@@ -140,6 +168,7 @@ typedef enum {
 #define TT_RELEASE_SAFELY(__POINTER) { [__POINTER release]; __POINTER = nil; }
 #define TT_AUTORELEASE_SAFELY(__POINTER) { [__POINTER autorelease]; __POINTER = nil; }
 #define TT_INVALIDATE_TIMER(__TIMER) { [__TIMER invalidate]; __TIMER = nil; }
+#define TT_RELEASE_CF_SAFELY(__REF) { if (nil != (__REF)) { CFRelease(__REF); __REF = nil; } }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -161,7 +190,7 @@ BOOL TTIsEmptyArray(id object);
 /**
  * Tests if an object is a set which is empty.
  */
-BOOL TTIsEmptyArray(id object);
+BOOL TTIsEmptySet(id object);
 
 /**
  * Tests if an object is a string which is empty.

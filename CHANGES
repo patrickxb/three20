@@ -1,3 +1,89 @@
+Changes since February 1, 2010
+
+- [NEW] TTTwitter sample app. See the README.mdown file for in-depth details.
+
+- [NEW] TTXMLParser - A barebones XML parser that takes an XML string and creates an NSObject.
+        Options include support for RSS feeds. See the new TTTwitter sample app for an example.
+
+- [NEW] TTTableHeaderDragRefreshView, TTTableViewDragRefreshDelegate. These two new objects
+        together implement the "drag-to-refresh" table header seen in other apps on the app
+        store. Thanks to uprise78 for this fix.
+
+- [NEW] Add support for PUT HTTP methods. Thanks to dima.
+
+- [FIXED] github#71 navigationBarTintColor and toolbarTintColor issues for TTDefaultSheet
+          and TTWebController.
+
+- [FIXED] github#148 Add _toolbar.tintColor to TTPhotoViewController.
+
+- [DOCUMENTATION] TTURLRequestDelegate, TTURLRequest, TTURLRequestQueue, TTWebController,
+                  TTYouTubeView, TTTableViewDelegate*.
+
+- [BUILD] Add a prefix header to Debug and Release builds.
+
+- [BUILD] Add a new build mode "Debug Dev" for use when hacking on Three20.
+
+- [BUILD] Reduced include scope of TTDebugFlags.h for faster rebuild times when debugging.
+
+Changes since January 22, 2010
+
+- [NEW] TTURLAction object for TTNavigator.
+
+- [DEPRECATED] openURL methods of TTNavigator.
+
+- [DEPRECATED] TTImageView.URL => TTImageView.urlPath.
+
+- [DOCUMENTATION] Documented TTView, TTImageView, TTScrollView, TTYouTubeView,
+                  TTNavigator and co.
+
+- [MINOR] Cleaned up the debugging documentation.
+
+Changes since December 25, 2009
+
+- [NEW] TTURLRequest didReceiveAuthenticationChallenge for authentication challenges.
+
+- [DEPRECATED] isWhitespace. Use isWhitespaceAndNewlines instead.
+
+- [XCODE] Refactoring problems solved. TTUserInfo weak/strong properties renamed
+          to weakRef/strongRef, respectively.
+
+- [MINOR] Use __PRETTY_FUNCTION__ for debug logs. (@steipete)
+
+Changes from December 18, 2009
+
+- [NEW] TTRecursiveProgress object for recursive progress (go figure!)
+        See TTRecursiveProgress.h for more details
+
+- [LOCALE] Numerous fixes to diffstrings
+
+- [LOCALE] Make --merge in diffstrings actually work
+
+- [LOCALE] Update German, Spanish, Italian, Japanese, Chinese, and Taiwanese
+
+- [NETWORK] TTNetworkRequestStarted/Stopped now threadsafe.
+
+- [CRASHFIX] Synchronous connections modifying non-threadsafe members
+
+Changes from December 11, 2009
+
+- [NEW] -[NSDate formatShortRelativeTime]
+
+- [NEW] Unit tests for most of Core and part of UI
+
+- [APPSTORE] Rename previousViewController to ttPreviousViewController
+
+- [APPSTORE] Rename lineHeight to ttLineHeight
+
+- [APPSTORE] Rename screenX and screenY to ttScreenX and ttScreenY
+
+- [FIXED] diffstrings sorts strings tables to make diffs more sensible
+
+- [DEPRECATED] TTLOG
+
+- [DEPRECATED] TTIsEmpty* methods
+
+- [MINOR] Properly calculate the scroll height in the "Styled Views"
+          example in TTCatalog
 
 Changes from December 5, 2009
 

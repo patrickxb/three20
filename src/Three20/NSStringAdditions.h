@@ -1,28 +1,43 @@
-/**
- * Copyright 2009 Facebook
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+//
+// Copyright 2009-2010 Facebook
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-@interface NSString (TTCategory)
+#import "Three20/TTCorePreprocessorMacros.h"
+
+/**
+ * Doxygen does not handle categories very well, so please refer to the .m file in general
+ * for the documentation that is reflected on api.three20.info.
+ */
+@interface NSString (TTAdditions)
+
+/**
+ * Determines if the string contains only whitespace and newlines.
+ */ 
+- (BOOL)isWhitespaceAndNewlines;
 
 /**
  * Determines if the string contains only whitespace.
- */ 
-- (BOOL)isWhitespace;
+ *
+ * Deprecated due to the name not being clear. The new isWhiteSpcaeAndNewlines method is
+ * functionality identical, yet more proper in its naming.
+ *
+ * @deprecated
+ */
+- (BOOL)isWhitespace __TTDEPRECATED_METHOD;
 
 /**
  * Determines if the string is empty or contains only whitespace.
@@ -43,17 +58,6 @@
  * Returns a string with all HTML tags removed.
  */
 - (NSString*)stringByRemovingHTMLTags;
-
-/**
- * Converts the string to an object using TTURLMap.
- */
-- (id)objectValue;
-
-/**
- * Opens a URL with the string using TTURLMap.
- */
-- (void)openURL;
-- (void)openURLFromButton:(UIView*)button;
 
 /**
  * Compares two strings expressing software versions.
@@ -90,3 +94,4 @@
 - (NSComparisonResult)versionStringCompare:(NSString *)other;
 
 @end
+

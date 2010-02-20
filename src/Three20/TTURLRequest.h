@@ -49,6 +49,8 @@
   NSInteger             _totalBytesLoaded;
   NSInteger             _totalBytesExpected;
 
+  NSInteger _bodySize;
+
   id    _userInfo;
 
   BOOL  _isLoading;
@@ -58,6 +60,8 @@
 
   NSMutableArray* _delegates;
 }
+
+@property (readonly) NSInteger bodySize;
 
 /**
  * The URL to be loaded by the request.

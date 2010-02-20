@@ -21,11 +21,11 @@
 
 @interface TTTableItem : NSObject <NSCoding> {
   id _userInfo;
-  id _selfObj;
+//  id _selfObj;
 }
 
 @property(nonatomic,retain) id userInfo;
-@property(nonatomic,retain) id selfObj;
+//@property(nonatomic,retain) id selfObj;
 
 @end
 

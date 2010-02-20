@@ -23,7 +23,7 @@
 @implementation TTTableItem
 
 @synthesize userInfo = _userInfo;
-@synthesize selfObj = _selfObj;
+//@synthesize selfObj = _selfObj;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // NSObject
@@ -37,7 +37,7 @@
 
 - (void)dealloc {
   TT_RELEASE_SAFELY(_userInfo);
-  TT_RELEASE_SAFELY(_selfObj);
+//  TT_RELEASE_SAFELY(_selfObj);
   [super dealloc];
 }
 

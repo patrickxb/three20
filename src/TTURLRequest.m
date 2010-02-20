@@ -61,6 +61,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 >>>>>>> 924867c34ea088920c081a5c790f14020c727934
 */
 
+/*
 @synthesize timestamp             = _timestamp;
 
 @synthesize totalBytesLoaded      = _totalBytesLoaded;
@@ -74,7 +75,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 @synthesize filterPasswordLogging = _filterPasswordLogging;
 
 @synthesize delegates             = _delegates;
-
+*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 + (TTURLRequest*)request {

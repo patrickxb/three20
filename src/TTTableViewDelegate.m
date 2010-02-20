@@ -103,9 +103,10 @@
   if ([object isKindOfClass:[TTTableLinkedItem class]]) {
     TTTableLinkedItem* item = object;
     if (item.URL && [_controller shouldOpenURL:item.URL]) {
-        if (item.selfObj) {
-            NSDictionary* query = [NSDictionary dictionaryWithObject:item.selfObj forKey:@"selfObj"];
-            [[TTNavigator navigator] openURL:item.URL query:query animated:YES];
+        if (item.userInfo) {
+            NSDictionary* query = [NSDictionary dictionaryWithObject:item.userInfo forKey:@"userInfo"];
+            [[TTNavigator navigator] openURLAction:[[[TTURLAction actionWithURLPath:item.URL] applyQuery:query] applyAnimated:YES]];
+
         }
         else {
             TTOpenURL(item.URL);

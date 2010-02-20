@@ -15,7 +15,7 @@
  */
 
 #define TTDFLAG_VIEWCONTROLLERS         0
-#define TTDFLAG_NAVIGATOR               0
+#define TTDFLAG_NAVIGATOR               1
 #define TTDFLAG_TABLEVIEWMODIFICATIONS  0
 #define TTDFLAG_LAUNCHERVIEW            0
 #define TTDFLAG_URLREQUEST              0
